@@ -56,7 +56,7 @@ class PatchesEmbedding(nn.Module):
     ):
         super(PatchesEmbedding, self).__init__()
 
-        self.embedding = nn.Conv2d(
+        self.patch_projector = nn.Conv2d(
             in_channels=in_channels,
             out_channels=embedding_dim,
             kernel_size=patch_size,
@@ -64,7 +64,7 @@ class PatchesEmbedding(nn.Module):
         )
 
     def forward(self, x):
-        x = self.embedding(x)
+        x = self.patch_projector(x)
         x = einops.rearrange(x, "b d h w -> b (h w) d")
 
         return x
