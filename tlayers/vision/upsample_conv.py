@@ -1,5 +1,6 @@
 from typing import Optional, Tuple, Union
 
+import torch
 from torch import nn
 
 
@@ -50,7 +51,7 @@ class UpsampleConv2d(nn.Module):
             padding_mode
         )
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor):
         x = self.upsample(x)
         x = self.conv(x)
 

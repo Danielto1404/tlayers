@@ -63,7 +63,7 @@ class PatchesEmbedding(nn.Module):
             stride=patch_size
         )
 
-    def forward(self, x):
+    def forward(self, x: torch.Tensor):
         x = self.patch_projector(x)
         x = einops.rearrange(x, "b d h w -> b (h w) d")
 
