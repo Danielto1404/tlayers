@@ -15,18 +15,18 @@ class UpsampleConv2d(nn.Module):
             groups: int = 1,
             bias: bool = True,
             padding_mode: str = "zeros",
-            size: Optional[Union[int, Tuple[int, ...]]] = None,
-            scale_factor: Optional[Union[float, tuple[float, ...]]] = None,
-            mode: str = 'nearest',
+            upsample_size: Optional[Union[int, Tuple[int, ...]]] = None,
+            upsample_scale_factor: Optional[Union[float, tuple[float, ...]]] = None,
+            upsample_mode: str = 'nearest',
             align_corners: Optional[bool] = None,
             recompute_scale_factor: Optional[bool] = None,
     ):
         super(UpsampleConv2d, self).__init__()
 
         self.upsample = nn.Upsample(
-            size,
-            scale_factor,
-            mode,
+            upsample_size,
+            upsample_scale_factor,
+            upsample_mode,
             align_corners,
             recompute_scale_factor
         )
