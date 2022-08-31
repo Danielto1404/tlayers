@@ -16,7 +16,8 @@ setup(
         'NLP'
     ],
     install_requires=[
-        'torch'
+        'torch',
+        'einops'
     ],
     classifiers=[
         'Development Status :: 4 - Beta',

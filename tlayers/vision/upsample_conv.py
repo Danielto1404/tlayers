@@ -1,9 +1,13 @@
-from typing import Union, Optional, Tuple
+from typing import Optional, Tuple, Union
 
 from torch import nn
 
 
 class UpsampleConv2d(nn.Module):
+    """
+    Upsamples a given multi-channel 2D (spatial) data, and then applies 2D convolution on it.
+    """
+
     def __init__(
             self,
             in_channels: int,
@@ -21,6 +25,9 @@ class UpsampleConv2d(nn.Module):
             align_corners: Optional[bool] = None,
             recompute_scale_factor: Optional[bool] = None,
     ):
+        if upsample_size is None and upsample_scale_factor is None:
+            raise ValueError("either `upsample_size` or `upsample_scale_factor` should be defined.")
+
         super(UpsampleConv2d, self).__init__()
 
         self.upsample = nn.Upsample(
