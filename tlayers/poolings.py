@@ -2,26 +2,24 @@ import torch
 from torch import nn
 
 
-class MeanPooling(nn.Module):
+class _DimPooling(nn.Module):
     def __init__(
             self,
             dim: int = 1
     ):
-        super(MeanPooling, self).__init__()
+        super(_DimPooling, self).__init__()
         self.dim = dim
 
+    def __repr__(self):
+        return f"{self.__class__.__name__}(dim={self.dim})"
+
+
+class MeanPooling(_DimPooling):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return x.mean(dim=self.dim)
 
 
-class MaxPooling(nn.Module):
-    def __init__(
-            self,
-            dim: int = 1,
-    ):
-        super(MaxPooling, self).__init__()
-        self.dim = dim
-
+class MaxPooling(_DimPooling):
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         return x.max(dim=self.dim)
 
@@ -41,3 +39,6 @@ class ClsPooling(nn.Module):
             return x[:, self.cls_position]
         else:
             return x[self.cls_position]
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}(cls_position={self.cls_position}, batch_first={self.batch_first})"
